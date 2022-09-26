@@ -92,7 +92,7 @@ allprojects {
         }
         publications {
             register<MavenPublication>(project.name) {
-                val githubUserName = repo.substring(repo.indexOf("/"))
+                val githubUserName = repo.substring(0, repo.indexOf("/"))
                 groupId = "io.github.${githubUserName.toLowerCaseAsciiOnly()}"
                 artifactId = project.name
                 version = project.version.toString()
