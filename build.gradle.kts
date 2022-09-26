@@ -77,13 +77,13 @@ allprojects {
         repositories {
             maven {
                 name = "GitHubPackages"
-                val repo = findProperty("GITHUB_REPOSITORY")
+                val repo = System.getenv("GITHUB_REPOSITORY")
 
                 url = uri("https://maven.pkg.github.com/$repo")
                 credentials {
 
-                    username = findProperty("GITHUB_ACTOR") as? String
-                    password = findProperty("GITHUB_TOKEN") as? String
+                    username = System.getenv("GITHUB_ACTOR") as? String
+                    password = System.getenv("GITHUB_TOKEN") as? String
                 }
             }
         }
