@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.util.capitalizeDecapitalize.toLowerCaseAsciiOnly
+
 val kotlin_version = "1.7.0"
 buildscript {
     repositories {
@@ -74,10 +76,11 @@ allprojects {
 
 
     publishing {
+        val repo = System.getenv("GITHUB_REPOSITORY")
+        if (repo === null) return@publishing
         repositories {
             maven {
                 name = "GitHubPackages"
-                val repo = System.getenv("GITHUB_REPOSITORY")
 
                 url = uri("https://maven.pkg.github.com/$repo")
                 credentials {
@@ -89,7 +92,8 @@ allprojects {
         }
         publications {
             register<MavenPublication>(project.name) {
-                groupId = this.groupId
+                val githubUserName = repo.substring(repo.indexOf("/"))
+                groupId = "io.github.${githubUserName.toLowerCaseAsciiOnly()}"
                 artifactId = project.name
                 version = project.version.toString()
                 artifact(sourcesArtifact)
