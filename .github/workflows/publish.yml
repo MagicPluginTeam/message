@@ -7,6 +7,7 @@ env:
   GITHUB_REPOSITORY: ${{ github.repository }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   GITHUB_ACTOR: ${{ github.actor }}
+  GITHUB_BUILD_NUMBER: ${{ github.run_number }}
 jobs:
   gradle:
     strategy:

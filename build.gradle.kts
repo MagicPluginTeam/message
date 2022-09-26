@@ -93,7 +93,7 @@ allprojects {
                 val githubUserName = repo.substring(0, repo.indexOf("/"))
                 groupId = "io.github.${githubUserName.toLowerCaseAsciiOnly()}"
                 artifactId = project.name
-                version = project.version.toString()
+                version = System.getenv("GITHUB_BUILD_NUMBER")?: project.version.toString()
                 artifact(sourcesArtifact)
                 artifact(javadocArtifact)
             }
