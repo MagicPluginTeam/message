@@ -16,6 +16,7 @@ plugins {
     id("maven-publish")
     application
 }
+apply(plugin = "kotlin")
 apply(plugin = "com.github.johnrengelman.shadow")
 tasks.withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
     archiveFileName.set("${rootProject.name}.jar")
@@ -54,10 +55,7 @@ typealias Shadowjar = com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 tasks {
     val sourcesJar by creating(Shadowjar::class) {
         archiveClassifier.set("sources")
-        from(
-            sourceSets["main"].java.srcDirs,
-//            sourceSets["main"].kotlin.srcDirs
-        )
+        from(kotlin.sourceSets["main"].kotlin.srcDirs)
     }
     val dokkaHtml by getting(org.jetbrains.dokka.gradle.DokkaTask::class)
     val javadocJar by creating(Shadowjar::class) {
