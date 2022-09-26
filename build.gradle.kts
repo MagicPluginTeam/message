@@ -69,7 +69,7 @@ tasks {
     }
 }
 
-subprojects {
+allprojects {
     apply(plugin = "maven-publish")
 
 
